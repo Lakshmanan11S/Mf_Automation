@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
+
+
 const performanceSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        enum: ['Equity', 'Debt', 'Hybrid', 'SolutionOriented', 'Other'], 
+        required: true, 
+    },
     SchemeName: {
         type: String,
         index: true, 
@@ -14,41 +21,66 @@ const performanceSchema = new mongoose.Schema({
     },
     NAV: {
         Date: { 
-            type: Date,
+            type: String,
             index: true, 
         },
         Regular: { type: Number },
         Direct: { type: Number },
     },
     Returns: {
+        "7days": {
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
+        },
+        "15days": {
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
+        },
+        "1Month": {
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
+        },
+        "3Month": {
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
+        },
+        "6Month": {
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
+        },
         "1Year": {
-            Regular: { type: Number , default: null},
-            Direct: { type: Number, default: null },
-            BenchMark: { type: Number , default: null},
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
         },
         "3Year": {
-            Regular: { type: Number, default: null },
-            Direct: { type: Number , default: null},
-            BenchMark: { type: Number, default: null },
+            Regular: { type: String, default: null },
+            Direct: { type: String , default: null},
+            BenchMark: { type: String, default: null },
         },
         "5Year": {
-            Regular: { type: Number , default: null},
-            Direct: { type: Number, default: null },
-            BenchMark: { type: Number , default: null},
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String , default: null},
         },
         "10Year": {
-            Regular: { type: Number , default: null},
-            Direct: { type: Number, default: null },
-            BenchMark: { type: Number, default: null },
+            Regular: { type: String , default: null},
+            Direct: { type: String, default: null },
+            BenchMark: { type: String, default: null },
         },
         SinceLaunch: {
-            Regular: { type: Number , default: null},
-            Direct: { type: Number , default: null},
-            BenchMark: { type: Number, default: null },
+            Regular: { type: String , default: null},
+            Direct: { type: String , default: null},
+            BenchMark: { type: String, default: null },
         },
     },
     DailyAUMCr: { type: String , default: null},
-});
+},{ timestamps: true },);
 
 
 performanceSchema.index({ SchemeName: 1, "NAV.Date": 1 }); 
